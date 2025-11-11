@@ -2,6 +2,9 @@
   "name": "@deepsel/cms-utils",
   "version": "1.0.0",
   "description": "Helper utilities for DeepCMS",
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DeepselSystems/cms-utils.git"
