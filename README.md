@@ -1,6 +1,6 @@
 # @deepsel/cms-utils
 
-A collection of light-weight helper functions for building DeepCMS features in JavaScript/TypeScript apps.
+A collection of light-weight helper functions for building DeepCMS themes and features in JavaScript/TypeScript.
 
 `@deepsel/cms-utils` is designed to be:
 
@@ -21,11 +21,11 @@ npm install @deepsel/cms-utils
 Example (TypeScript / ESM):
 
 ```typescript
-import { getMenusForCurrentLang } from '@deepsel/cms-utils';
+import { isValidLanguageCode } from '@deepsel/cms-utils';
 
-const menus = getMenusForCurrentLang();
+const isValidLanguageCode = isValidLanguageCode('en');
 
-console.log(menus);
+console.log({isValidLanguageCode});
 ```
 
 ## Local Development
@@ -89,9 +89,11 @@ In your app (`my-app`), import from `@deepsel/cms-utils` as if it were a regular
 
 ```typescript
 // inside my-app
-import { getMenusForCurrentLang } from '@deepsel/cms-utils';
+import { isValidLanguageCode } from '@deepsel/cms-utils';
 
-const menus = getMenusForCurrentLang();
+const isValidLanguageCode = isValidLanguageCode('en');
+
+console.log({isValidLanguageCode});
 ```
 
 ### 5. Build the Package for Production
