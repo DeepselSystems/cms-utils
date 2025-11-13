@@ -25,7 +25,7 @@ import { isValidLanguageCode } from '@deepsel/cms-utils';
 
 const isValidLanguageCode = isValidLanguageCode('en');
 
-console.log({isValidLanguageCode});
+console.log({ isValidLanguageCode });
 ```
 
 ## Local Development
@@ -93,7 +93,7 @@ import { isValidLanguageCode } from '@deepsel/cms-utils';
 
 const isValidLanguageCode = isValidLanguageCode('en');
 
-console.log({isValidLanguageCode});
+console.log({ isValidLanguageCode });
 ```
 
 ### 5. Build the Package for Production
