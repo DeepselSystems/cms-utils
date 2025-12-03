@@ -1,5 +1,3 @@
-import type { ApiResponse } from './types';
-
 /**
  * Fetches Form data from the backend by language and slug
  */
@@ -7,7 +5,7 @@ export async function fetchFormData(
   lang: string,
   slug: string,
   backendHost: string = 'http://localhost:8000',
-): Promise<ApiResponse> {
+): Promise<Record<string, unknown>> {
   try {
     // Format the slug properly
     const formattedSlug = slug.replace(/^\/forms\//, '');

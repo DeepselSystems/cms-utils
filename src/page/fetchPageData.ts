@@ -1,5 +1,5 @@
 import { fetchPublicSettings } from './fetchPublicSettings';
-import type { ApiResponse } from './types';
+import type { PageData } from './types';
 
 /**
  * Fetches page data from the backend by language and slug
@@ -11,7 +11,7 @@ export async function fetchPageData(
   authToken: string | null = null,
   astroRequest: Request | null = null,
   backendHost: string = 'http://localhost:8000',
-): Promise<ApiResponse> {
+): Promise<PageData> {
   try {
     // Format the slug properly, make sure it starts with a slash
     let formattedSlug = slug.startsWith('/') ? slug : `/${slug}`;
@@ -61,21 +61,8 @@ export async function fetchPageData(
     }
 
     // Add authentication headers if token exists (for both preview and protected content)
-    let token = authToken;
-
-    // If no token provided and we're in browser environment, try Capacitor Preferences
-    if (!token && typeof window !== 'undefined') {
-      try {
-        const { Preferences } = await import('@capacitor/preferences');
-        const tokenResult = await Preferences.get({ key: 'token' });
-        token = tokenResult.value;
-      } catch (e) {
-        console.warn('Could not get token from Preferences:', e);
-      }
-    }
-
-    if (token) {
-      fetchOptions.headers['Authorization'] = `Bearer ${token}`;
+    if (authToken) {
+      fetchOptions.headers['Authorization'] = `Bearer ${authToken}`;
     }
 
     // Fetch the page data from the backend
@@ -83,7 +70,7 @@ export async function fetchPageData(
 
     // Handle authentication errors
     if (response.status === 401) {
-      return { error: true, status: 401, message: 'Authentication required' };
+      throw new Error('Authentication required');
     }
 
     // Only treat actual 404 as not found
@@ -99,11 +86,11 @@ export async function fetchPageData(
           status: 404,
           detail,
           public_settings: siteSettings,
-          lang: lang || siteSettings?.default_language?.iso_code || 'en',
+          lang: lang || siteSettings.default_language?.iso_code || 'en',
         };
       } catch (settingsError) {
         console.warn('Could not fetch site settings for 404 page:', settingsError);
-        return { notFound: true, status: 404, detail };
+        throw new Error(`Page not found: ${detail}`);
       }
     }
 
@@ -114,10 +101,10 @@ export async function fetchPageData(
       return jsonData;
     } catch (parseError: any) {
       console.error(`Failed to parse response: ${parseError.message}`);
-      return { error: true, parseError: parseError.message };
+      throw new Error(`Failed to parse response: ${parseError.message}`);
     }
   } catch (error: any) {
     console.error('Error fetching page data:', error);
-    return { error: true, message: error.message };
+    throw error;
   }
 }

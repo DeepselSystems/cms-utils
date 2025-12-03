@@ -1,6 +1,9 @@
 import type { MenuItem } from './menus/types';
+import type { SpecialTemplate } from './page/types';
 
 export interface SiteSettings {
+  id: number;
+  name: string;
   domains: string[];
   available_languages: Array<{
     id: number;
@@ -23,4 +26,15 @@ export interface SiteSettings {
   show_chatbox: boolean;
   website_custom_code: string | null;
   menus: MenuItem[];
+  access_token_expire_minutes: number;
+  require_2fa_all_users: boolean;
+  allow_public_signup: boolean;
+  is_enabled_google_sign_in: boolean;
+  is_enabled_saml: boolean;
+  saml_sp_entity_id: string | null;
+  auto_translate_components: boolean;
+  has_openai_api_key: boolean;
+  ai_default_writing_model_id: number;
+  special_templates: Record<string, SpecialTemplate>;
+  selected_theme: string;
 }

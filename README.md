@@ -1,12 +1,14 @@
 # @deepsel/cms-utils
 
-A collection of light-weight helper functions for building DeepCMS themes and features in JavaScript/TypeScript.
+Framework-agnostic utilities for building DeepCMS themes in any JavaScript framework.
 
 `@deepsel/cms-utils` is designed to be:
 
-- **Framework-agnostic** – works with Node, React, Astro, Next.js, etc.
+- **Framework-agnostic** – works with React, Vue, Angular, Astro, Next.js, etc.
 - **TypeScript-friendly** – fully typed helpers.
-- **CMS-oriented** – utilities for menus, slugs, URLs, localization, content trees, etc.
+- **CMS-oriented** – utilities for menus, slugs, URLs, localization, page data fetching, etc.
+
+> **Note:** For React-specific hooks and components, use [`@deepsel/deep-cms-react`](https://github.com/DeepselSystems/deep-cms-react)
 
 ---
 

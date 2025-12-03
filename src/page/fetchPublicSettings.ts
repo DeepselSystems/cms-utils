@@ -8,7 +8,7 @@ export async function fetchPublicSettings(
   astroRequest: Request | null = null,
   lang: string | null = null,
   backendHost: string = 'http://localhost:8000',
-): Promise<SiteSettings | null> {
+): Promise<SiteSettings> {
   try {
     let url;
 
@@ -73,6 +73,6 @@ export async function fetchPublicSettings(
     return data;
   } catch (error) {
     console.error('Error fetching public settings:', error);
-    return null;
+    throw error;
   }
 }

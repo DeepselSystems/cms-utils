@@ -1,7 +1,7 @@
 /**
  * Extracts the authentication token from cookies or URL parameter (for iframe preview)
  */
-export function getAuthToken(astro: any) {
+export function getAuthToken(astro: any): string | null {
   let authToken = null;
   const cookies = astro.request.headers.get('cookie');
   if (cookies) {
